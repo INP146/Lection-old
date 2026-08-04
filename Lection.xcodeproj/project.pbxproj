@@ -7,24 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F2BFA5C8A76626213C5EC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 636B82AD9B459A906A0176D7 /* Assets.xcassets */; };
-		4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB86238B33BA404D2C9F538 /* ContentView.swift */; };
-		5F2E03E22E8DCEB472E7FD51 /* LectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C33C0305D1E2B20C6124A4 /* LectionApp.swift */; };
-		18293A4B5C6D7E8F901A2B3C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */; };
-		4B5C6D7E8F901A2B3C4D5E6F /* ReadingDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */; };
-		A1B2C3D4E5F60718293A4B5C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */; };
-		E5F60718293A4B5C6D7E8F90 /* NewPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */; };
 		100000000000000000000001 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000001 /* Paragraph.swift */; };
 		100000000000000000000002 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000002 /* Question.swift */; };
 		100000000000000000000003 /* ProcessingJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000003 /* ProcessingJob.swift */; };
 		100000000000000000000004 /* LectionSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* LectionSchema.swift */; };
 		100000000000000000000005 /* PreviewFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* PreviewFixtures.swift */; };
+		18293A4B5C6D7E8F901A2B3C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */; };
+		2F2BFA5C8A76626213C5EC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 636B82AD9B459A906A0176D7 /* Assets.xcassets */; };
 		400000000000000000000001 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400000000000000000000002 /* PersistenceTests.swift */; };
+		4B5C6D7E8F901A2B3C4D5E6F /* ReadingDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */; };
+		4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB86238B33BA404D2C9F538 /* ContentView.swift */; };
 		500000000000000000000001 /* ProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000001 /* ProviderConfiguration.swift */; };
 		500000000000000000000002 /* ProviderConnectionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000002 /* ProviderConnectionTester.swift */; };
 		500000000000000000000003 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000003 /* KeychainStore.swift */; };
 		500000000000000000000004 /* ProviderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000004 /* ProviderSettings.swift */; };
 		500000000000000000000005 /* ProviderSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000005 /* ProviderSettingsTests.swift */; };
+		5F2E03E22E8DCEB472E7FD51 /* LectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C33C0305D1E2B20C6124A4 /* LectionApp.swift */; };
 		800000000000000000000001 /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000001 /* AIProvider.swift */; };
 		800000000000000000000002 /* AIResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000002 /* AIResponseValidator.swift */; };
 		800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000003 /* StructuredResponseDecoder.swift */; };
@@ -36,11 +34,13 @@
 		A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* ReadingPromptBuilder.swift */; };
 		A00000000000000000000003 /* general-english-reading.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* general-english-reading.json */; };
 		A00000000000000000000004 /* ReadingSkillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* ReadingSkillTests.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */; };
 		B00000000000000000000001 /* GenerationPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* GenerationPipeline.swift */; };
 		B00000000000000000000002 /* GenerationPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* GenerationPipelineTests.swift */; };
 		C00000000000000000000001 /* GenerationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* GenerationCoordinator.swift */; };
 		C00000000000000000000002 /* ReadingPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000002 /* ReadingPracticeView.swift */; };
 		D00000000000000000000001 /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10000000000000000000001 /* KeyboardDismissModifier.swift */; };
+		E5F60718293A4B5C6D7E8F90 /* NewPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,26 +55,23 @@
 
 /* Begin PBXFileReference section */
 		05C33C0305D1E2B20C6124A4 /* LectionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectionApp.swift; sourceTree = "<group>"; };
-		293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2C9396E218134E8049FCF6B1 /* Lection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lection.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingDocument.swift; sourceTree = "<group>"; };
-		636B82AD9B459A906A0176D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
-		DCB86238B33BA404D2C9F538 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPracticeView.swift; sourceTree = "<group>"; };
 		200000000000000000000001 /* Paragraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
 		200000000000000000000002 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		200000000000000000000003 /* ProcessingJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingJob.swift; sourceTree = "<group>"; };
 		200000000000000000000004 /* LectionSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectionSchema.swift; sourceTree = "<group>"; };
 		200000000000000000000005 /* PreviewFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFixtures.swift; sourceTree = "<group>"; };
+		293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2C9396E218134E8049FCF6B1 /* Lection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		400000000000000000000002 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		400000000000000000000004 /* LectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingDocument.swift; sourceTree = "<group>"; };
 		600000000000000000000001 /* ProviderConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfiguration.swift; sourceTree = "<group>"; };
 		600000000000000000000002 /* ProviderConnectionTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionTester.swift; sourceTree = "<group>"; };
 		600000000000000000000003 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		600000000000000000000004 /* ProviderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettings.swift; sourceTree = "<group>"; };
 		600000000000000000000005 /* ProviderSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettingsTests.swift; sourceTree = "<group>"; };
 		600000000000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		636B82AD9B459A906A0176D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		900000000000000000000001 /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
 		900000000000000000000002 /* AIResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponseValidator.swift; sourceTree = "<group>"; };
 		900000000000000000000003 /* StructuredResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredResponseDecoder.swift; sourceTree = "<group>"; };
@@ -88,9 +85,12 @@
 		A10000000000000000000004 /* ReadingSkillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingSkillTests.swift; sourceTree = "<group>"; };
 		B10000000000000000000001 /* GenerationPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipeline.swift; sourceTree = "<group>"; };
 		B10000000000000000000002 /* GenerationPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipelineTests.swift; sourceTree = "<group>"; };
+		B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		C10000000000000000000001 /* GenerationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationCoordinator.swift; sourceTree = "<group>"; };
 		C10000000000000000000002 /* ReadingPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPracticeView.swift; sourceTree = "<group>"; };
 		D10000000000000000000001 /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
+		DCB86238B33BA404D2C9F538 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPracticeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0718293A4B5C6D7E8F901A2B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000001 /* GenerationCoordinator.swift */,
+				F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 		0CDF064C0B268EB0EB7294BD = {
 			isa = PBXGroup;
 			children = (
@@ -111,36 +120,6 @@
 				400000000000000000000006 /* LectionTests */,
 				8ED1701E9BB5BD1BC10638C5 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		85513A506FC0223D1709A17C /* Lection */ = {
-			isa = PBXGroup;
-			children = (
-				700000000000000000000001 /* AI */,
-				636B82AD9B459A906A0176D7 /* Assets.xcassets */,
-				DCB86238B33BA404D2C9F538 /* ContentView.swift */,
-				C3D4E5F60718293A4B5C6D7E /* Features */,
-				600000000000000000000006 /* Info.plist */,
-				05C33C0305D1E2B20C6124A4 /* LectionApp.swift */,
-				6D7E8F901A2B3C4D5E6F7081 /* Models */,
-				300000000000000000000001 /* Persistence */,
-				A20000000000000000000001 /* Resources */,
-				700000000000000000000002 /* Security */,
-				D20000000000000000000001 /* UI */,
-			);
-			path = Lection;
-			sourceTree = "<group>";
-		};
-		6D7E8F901A2B3C4D5E6F7081 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */,
-				A10000000000000000000001 /* ReadingSkill.swift */,
-				200000000000000000000001 /* Paragraph.swift */,
-				200000000000000000000002 /* Question.swift */,
-				200000000000000000000003 /* ProcessingJob.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		300000000000000000000001 /* Persistence */ = {
@@ -152,17 +131,6 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		C3D4E5F60718293A4B5C6D7E /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				0718293A4B5C6D7E8F901A2B /* Create */,
-				D4E5F60718293A4B5C6D7E8F /* Library */,
-				C20000000000000000000001 /* Reading */,
-				3A4B5C6D7E8F901A2B3C4D5E /* Settings */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
 		3A4B5C6D7E8F901A2B3C4D5E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,48 +138,6 @@
 				293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		0718293A4B5C6D7E8F901A2B /* Create */ = {
-			isa = PBXGroup;
-			children = (
-				C10000000000000000000001 /* GenerationCoordinator.swift */,
-				F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */,
-			);
-			path = Create;
-			sourceTree = "<group>";
-		};
-		D4E5F60718293A4B5C6D7E8F /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		C20000000000000000000001 /* Reading */ = {
-			isa = PBXGroup;
-			children = (
-				C10000000000000000000002 /* ReadingPracticeView.swift */,
-			);
-			path = Reading;
-			sourceTree = "<group>";
-		};
-		D20000000000000000000001 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				D10000000000000000000001 /* KeyboardDismissModifier.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		8ED1701E9BB5BD1BC10638C5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2C9396E218134E8049FCF6B1 /* Lection.app */,
-				400000000000000000000004 /* LectionTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		400000000000000000000006 /* LectionTests */ = {
@@ -226,6 +152,18 @@
 				A10000000000000000000004 /* ReadingSkillTests.swift */,
 			);
 			path = LectionTests;
+			sourceTree = "<group>";
+		};
+		6D7E8F901A2B3C4D5E6F7081 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */,
+				A10000000000000000000001 /* ReadingSkill.swift */,
+				200000000000000000000001 /* Paragraph.swift */,
+				200000000000000000000002 /* Question.swift */,
+				200000000000000000000003 /* ProcessingJob.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		700000000000000000000001 /* AI */ = {
@@ -251,12 +189,74 @@
 			path = Security;
 			sourceTree = "<group>";
 		};
+		85513A506FC0223D1709A17C /* Lection */ = {
+			isa = PBXGroup;
+			children = (
+				700000000000000000000001 /* AI */,
+				636B82AD9B459A906A0176D7 /* Assets.xcassets */,
+				DCB86238B33BA404D2C9F538 /* ContentView.swift */,
+				C3D4E5F60718293A4B5C6D7E /* Features */,
+				600000000000000000000006 /* Info.plist */,
+				05C33C0305D1E2B20C6124A4 /* LectionApp.swift */,
+				6D7E8F901A2B3C4D5E6F7081 /* Models */,
+				300000000000000000000001 /* Persistence */,
+				A20000000000000000000001 /* Resources */,
+				700000000000000000000002 /* Security */,
+				D20000000000000000000001 /* UI */,
+			);
+			path = Lection;
+			sourceTree = "<group>";
+		};
+		8ED1701E9BB5BD1BC10638C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C9396E218134E8049FCF6B1 /* Lection.app */,
+				400000000000000000000004 /* LectionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A20000000000000000000001 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000003 /* general-english-reading.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C20000000000000000000001 /* Reading */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000002 /* ReadingPracticeView.swift */,
+			);
+			path = Reading;
+			sourceTree = "<group>";
+		};
+		C3D4E5F60718293A4B5C6D7E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0718293A4B5C6D7E8F901A2B /* Create */,
+				D4E5F60718293A4B5C6D7E8F /* Library */,
+				C20000000000000000000001 /* Reading */,
+				3A4B5C6D7E8F901A2B3C4D5E /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D20000000000000000000001 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D10000000000000000000001 /* KeyboardDismissModifier.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D4E5F60718293A4B5C6D7E8F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,44 +415,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		40000000000000000000000C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lection.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lection";
-			};
-			name = Debug;
-		};
-		40000000000000000000000D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lection.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lection";
-			};
-			name = Release;
-		};
 		0BBFD174BF894A39FA4FAFF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -536,12 +498,51 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app;
 				PRODUCT_NAME = Lection;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		40000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lection.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lection";
+			};
+			name = Debug;
+		};
+		40000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lection.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lection";
+			};
+			name = Release;
 		};
 		B56389985377CC3837136A26 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -619,6 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lection.app;
 				PRODUCT_NAME = Lection;
 				SDKROOT = iphoneos;
