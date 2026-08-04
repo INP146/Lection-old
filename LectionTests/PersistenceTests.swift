@@ -35,7 +35,7 @@ struct PersistenceTests {
             #expect(document.paragraphs.count == 2)
             #expect(document.paragraphs.allSatisfy { $0.translatedText?.isEmpty == false })
             #expect(document.questions.count == 1)
-            #expect(document.questions.first?.options.count == 3)
+            #expect(document.questions.first?.options.count == 4)
             #expect(document.questions.first?.selectedOptionID != nil)
             #expect(document.questions.first?.answeredAt == Date(timeIntervalSince1970: 1_700_000_000))
             #expect(document.questions.first?.isCorrect == true)

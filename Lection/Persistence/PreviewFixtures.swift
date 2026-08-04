@@ -22,6 +22,8 @@ enum PreviewFixtures {
         let correctOption = QuestionOption(order: 0, text: "They search for food.")
         let question = Question(
             order: 0,
+            category: "detail comprehension",
+            difficulty: "easy to medium",
             stem: "Why do some animals enter quiet streets at night?",
             correctOptionID: correctOption.id,
             explanation: "The second paragraph says that they use these places to search for food.",
@@ -31,6 +33,7 @@ enum PreviewFixtures {
             correctOption,
             QuestionOption(order: 1, text: "They look for people."),
             QuestionOption(order: 2, text: "They avoid the parks."),
+            QuestionOption(order: 3, text: "They wait for sunrise."),
         ]
 
         let document = ReadingDocument(

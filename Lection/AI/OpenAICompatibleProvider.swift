@@ -5,26 +5,37 @@ struct OpenAICompatibleProvider: AIProvider, Sendable {
     private let apiKey: String
     private let dataLoader: any HTTPDataLoading
     private let maximumOutputRepairAttempts: Int
+    private let maximumResponseBytes: Int
+
+    var modelName: String { configuration.modelName }
 
     init(
         configuration: ProviderConfiguration,
         apiKey: String,
         dataLoader: any HTTPDataLoading = URLSessionHTTPDataLoader(),
-        maximumOutputRepairAttempts: Int = 1
+        maximumOutputRepairAttempts: Int = 1,
+        maximumResponseBytes: Int = 2_000_000
     ) {
         self.configuration = configuration
         self.apiKey = apiKey
         self.dataLoader = dataLoader
         // 第一阶段最多自动修复一次，避免 BYOK 场景下无上限地产生费用。
         self.maximumOutputRepairAttempts = min(max(maximumOutputRepairAttempts, 0), 1)
+        self.maximumResponseBytes = max(maximumResponseBytes, 1)
     }
 
     func generateArticle(
         request: ArticleGenerationRequest
     ) async throws -> GeneratedArticle {
         guard request.minimumParagraphCount > 0,
-              request.maximumParagraphCount >= request.minimumParagraphCount else {
-            throw AIProviderError.invalidRequest("文章段落数量约束无效。")
+              request.maximumParagraphCount >= request.minimumParagraphCount,
+              request.minimumWordCount > 0,
+              request.maximumWordCount >= request.minimumWordCount,
+              request.preferredWordCountTolerance >= 0,
+              request.preferredWordCount.map({
+                  (request.minimumWordCount...request.maximumWordCount).contains($0)
+              }) ?? true else {
+            throw AIProviderError.invalidRequest("文章长度或段落数量约束无效。")
         }
 
         return try await performStructuredRequest(
@@ -45,8 +56,15 @@ struct OpenAICompatibleProvider: AIProvider, Sendable {
         request: QuestionGenerationRequest
     ) async throws -> [GeneratedQuestion] {
         try validateSourceParagraphs(request.sourceParagraphs)
-        guard request.expectedQuestionCount > 0 else {
-            throw AIProviderError.invalidRequest("题目数量必须大于零。")
+        guard request.expectedQuestionCount > 0,
+              !request.questionPlan.isEmpty,
+              request.questionPlan.allSatisfy({
+                  $0.count > 0
+                      && !$0.category.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                      && !$0.difficulty.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+              }),
+              request.questionPlan.reduce(0, { $0 + $1.count }) == request.expectedQuestionCount else {
+            throw AIProviderError.invalidRequest("题目计划与题目数量约束无效。")
         }
 
         return try await performStructuredRequest(
@@ -199,6 +217,9 @@ struct OpenAICompatibleProvider: AIProvider, Sendable {
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw AIProviderError.invalidHTTPResponse
+        }
+        guard data.count <= maximumResponseBytes else {
+            throw AIProviderError.responseTooLarge
         }
         guard (200..<300).contains(httpResponse.statusCode) else {
             throw mapHTTPError(statusCode: httpResponse.statusCode, data: data)
@@ -444,14 +465,22 @@ private enum ResponseSchemas {
         let question = JSONValue.schemaObject(
             properties: [
                 "id": .schemaUUID,
+                "category": .schemaString,
+                "difficulty": .schemaString,
                 "stem": .schemaString,
-                "options": .schemaArray(items: option, minimumCount: 3),
+                "options": .schemaArray(
+                    items: option,
+                    minimumCount: QuestionGenerationRequest.expectedOptionCount,
+                    maximumCount: QuestionGenerationRequest.expectedOptionCount
+                ),
                 "correctOptionID": .schemaUUID,
                 "explanation": .schemaString,
                 "evidenceParagraphIDs": .schemaArray(items: .schemaUUID, minimumCount: 1),
             ],
             required: [
                 "id",
+                "category",
+                "difficulty",
                 "stem",
                 "options",
                 "correctOptionID",

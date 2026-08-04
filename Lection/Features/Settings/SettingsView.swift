@@ -82,6 +82,7 @@ struct SettingsView: View {
                 }
                 .disabled(settings.isBusy)
             }
+            .disabled(settings.isBusy)
             .keyboardDismissible(focusedField: $focusedField)
             .navigationTitle("设置")
             .alert("删除 API Key？", isPresented: $isDeleteConfirmationPresented) {

@@ -142,6 +142,21 @@ struct GenerationPipelineTests {
         #expect(await provider.callCounts() == .init(article: 1, questions: 1, translation: 2))
     }
 
+    @Test("Translation provenance records the provider used for this execution")
+    func translationProvenanceUsesExecutionModel() async throws {
+        let container = try LectionSchema.makeContainer(isStoredInMemoryOnly: true)
+        let provider = PipelineTestProvider(fixtures: makeFixtures())
+        let pipeline = GenerationPipeline(
+            modelContext: container.mainContext,
+            provider: provider,
+            executionModelName: "current-model"
+        )
+
+        let document = try await pipeline.start(makeRequest())
+
+        #expect(document.paragraphs.allSatisfy { $0.translationModel == "current-model" })
+    }
+
     @Test("Final validation failure is recorded and retries without another provider call")
     func retriesFinalValidationFailure() async throws {
         let container = try LectionSchema.makeContainer(isStoredInMemoryOnly: true)
@@ -329,7 +344,7 @@ struct GenerationPipelineTests {
         let paragraphs = (1...5).map { index in
             GeneratedParagraph(
                 id: fixtureUUID(group: 1, index: index),
-                text: "Paragraph \(index) explains one benefit of a neighborhood garden."
+                text: String(repeating: "garden ", count: 70) + "benefit."
             )
         }
         let questions = (1...5).map { questionIndex in
@@ -341,6 +356,8 @@ struct GenerationPipelineTests {
             }
             return GeneratedQuestion(
                 id: fixtureUUID(group: 3, index: questionIndex),
+                category: questionCategory(for: questionIndex),
+                difficulty: questionDifficulty(for: questionIndex),
                 stem: "What does paragraph \(questionIndex) explain?",
                 options: options,
                 correctOptionID: options[0].id,
@@ -363,6 +380,19 @@ struct GenerationPipelineTests {
 
     private func fixtureUUID(group: Int, index: Int) -> UUID {
         UUID(uuidString: String(format: "%08X-0000-0000-0000-%012X", group, index))!
+    }
+
+    private func questionCategory(for index: Int) -> String {
+        switch index {
+        case 1, 2: "detail comprehension"
+        case 3: "main idea"
+        case 4: "inference"
+        default: "vocabulary in context"
+        }
+    }
+
+    private func questionDifficulty(for index: Int) -> String {
+        index < 3 ? "easy to medium" : "medium"
     }
 
     private func makeDiskContainer(at url: URL) throws -> ModelContainer {
@@ -425,6 +455,8 @@ private actor PipelineTestProvider: AIProvider {
         return fixtures.questions.map { question in
             GeneratedQuestion(
                 id: question.id,
+                category: question.category,
+                difficulty: question.difficulty,
                 stem: question.stem,
                 options: question.options,
                 correctOptionID: question.correctOptionID,

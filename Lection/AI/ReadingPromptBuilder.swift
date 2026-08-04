@@ -95,7 +95,10 @@ enum ArticlePromptBuilder {
         return ArticleGenerationRequest(
             prompt: prompt,
             minimumParagraphCount: skill.paragraphCount.minimum,
-            maximumParagraphCount: skill.paragraphCount.maximum
+            maximumParagraphCount: skill.paragraphCount.maximum,
+            minimumWordCount: skill.targetWordCount.minimum,
+            maximumWordCount: skill.targetWordCount.maximum,
+            preferredWordCount: preferredWordCount
         )
     }
 }
@@ -121,6 +124,7 @@ enum QuestionPromptBuilder {
 
             Requirements for every question:
             - Use a unique UUID string for the question `id` and for every option `id`.
+            - `category` and `difficulty` must exactly match one entry in the Question plan above.
             - Provide exactly four distinct answer options.
             - `correctOptionID` must exactly equal one of that question's option IDs.
             - Write `stem` and option text in English.
@@ -139,7 +143,8 @@ enum QuestionPromptBuilder {
         return QuestionGenerationRequest(
             prompt: prompt,
             sourceParagraphs: sourceParagraphs,
-            expectedQuestionCount: skill.questionCount
+            expectedQuestionCount: skill.questionCount,
+            questionPlan: skill.questionPlan
         )
     }
 }

@@ -115,7 +115,8 @@ final class GenerationCoordinator {
                 let provider = try makeProvider()
                 let pipeline = GenerationPipeline(
                     modelContext: modelContext,
-                    provider: provider
+                    provider: provider,
+                    executionModelName: provider.modelName
                 ) { [weak self] job in
                     self?.receiveProgress(from: job)
                 }

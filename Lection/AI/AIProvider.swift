@@ -35,31 +35,48 @@ struct ArticleGenerationRequest: Equatable, Sendable {
     let prompt: AIRequestPrompt
     let minimumParagraphCount: Int
     let maximumParagraphCount: Int
+    let minimumWordCount: Int
+    let maximumWordCount: Int
+    let preferredWordCount: Int?
+    let preferredWordCountTolerance: Int
 
     init(
         prompt: AIRequestPrompt,
         minimumParagraphCount: Int,
-        maximumParagraphCount: Int
+        maximumParagraphCount: Int,
+        minimumWordCount: Int,
+        maximumWordCount: Int,
+        preferredWordCount: Int? = nil,
+        preferredWordCountTolerance: Int = 50
     ) {
         self.prompt = prompt
         self.minimumParagraphCount = minimumParagraphCount
         self.maximumParagraphCount = maximumParagraphCount
+        self.minimumWordCount = minimumWordCount
+        self.maximumWordCount = maximumWordCount
+        self.preferredWordCount = preferredWordCount
+        self.preferredWordCountTolerance = preferredWordCountTolerance
     }
 }
 
 struct QuestionGenerationRequest: Equatable, Sendable {
+    static let expectedOptionCount = 4
+
     let prompt: AIRequestPrompt
     let sourceParagraphs: [SourceParagraph]
     let expectedQuestionCount: Int
+    let questionPlan: [ReadingSkill.QuestionPlanItem]
 
     init(
         prompt: AIRequestPrompt,
         sourceParagraphs: [SourceParagraph],
-        expectedQuestionCount: Int = 5
+        expectedQuestionCount: Int = 5,
+        questionPlan: [ReadingSkill.QuestionPlanItem]
     ) {
         self.prompt = prompt
         self.sourceParagraphs = sourceParagraphs
         self.expectedQuestionCount = expectedQuestionCount
+        self.questionPlan = questionPlan
     }
 }
 
@@ -96,6 +113,8 @@ struct GeneratedParagraph: Codable, Equatable, Sendable, Identifiable {
 
 struct GeneratedQuestion: Codable, Equatable, Sendable, Identifiable {
     let id: UUID
+    let category: String
+    let difficulty: String
     let stem: String
     let options: [GeneratedQuestionOption]
     let correctOptionID: UUID
@@ -126,12 +145,17 @@ struct AIValidationIssue: Equatable, Sendable {
         case invalidRequest
         case emptyTitle
         case paragraphCountOutOfRange
+        case wordCountOutOfRange
+        case preferredWordCountMissed
         case emptyParagraph
         case duplicateParagraphID
         case questionCountMismatch
+        case questionPlanMismatch
         case duplicateQuestionID
+        case emptyQuestionCategory
+        case emptyQuestionDifficulty
         case emptyQuestionStem
-        case insufficientOptions
+        case optionCountMismatch
         case duplicateOptionID
         case duplicateOptionText
         case emptyOption
@@ -159,6 +183,7 @@ enum AIProviderError: LocalizedError, Equatable, Sendable {
     case server(statusCode: Int, message: String?)
     case invalidHTTPResponse
     case invalidProviderResponse
+    case responseTooLarge
     case emptyResponse
     case outputDecodingFailed
     case validationFailed([AIValidationIssue])
@@ -184,6 +209,8 @@ enum AIProviderError: LocalizedError, Equatable, Sendable {
             "模型服务返回了无法识别的 HTTP 响应。"
         case .invalidProviderResponse:
             "模型服务响应格式与 OpenAI-compatible Chat Completions API 不兼容。"
+        case .responseTooLarge:
+            "模型服务返回内容过大，已停止处理。"
         case .emptyResponse:
             "模型服务没有返回内容。"
         case .outputDecodingFailed:

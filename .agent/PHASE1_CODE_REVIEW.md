@@ -229,3 +229,26 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 5. 补齐 AppIcon，运行全部 41 个测试、iPhone/iPad 基础 UI 检查和 Release Archive。
 
 完成以上 High 与 Medium 问题，并实际运行现有测试后，再将 Phase 1 标记为通过更稳妥。
+
+## 6. 收口更新（2026-08-04）
+
+以下状态对应本报告第 2 节的原始问题；原始审查结论、证据和建议均保留，以便追溯。
+
+| 编号 | 当前状态 | 收口说明 |
+| --- | --- | --- |
+| H-01 | 已修复 | 词数范围与目标容差进入请求和校验器；题目新增 `category`、`difficulty`，按 `questionPlan` 的完整分布校验，并在 SwiftData 落库后的最终校验中复核。 |
+| H-02 | 已修复 | JSON Schema、响应校验、Preview fixture 和持久化测试统一为恰好 4 个选项。 |
+| M-01 | 已修复 | Coordinator 将本次实际 Provider 模型名传入 Pipeline，译文保存该执行模型而非创建草稿时的旧模型。 |
+| M-02 | 已修复 | 保存或测试连接期间禁用完整设置表单，避免被测配置在请求途中改变。 |
+| M-03 | 已修复 | 删除保存失败时回滚 `ModelContext` 并展示错误提示。 |
+| M-04 | 已修复 | 选择答案或提交答案保存失败时调用 `ModelContext.rollback()`，页面恢复可编辑状态。 |
+| L-01 | 待处理 | AppIcon 仍需由产品资产补齐，并以 Release Archive 验证。 |
+| L-02 | 部分缓解 | Provider 在 JSON 解码前拒绝超过 2 MB 的响应，并有 `responseTooLarge` 错误分类；仍建议增加 completion token 上限和流式长度限制。 |
+
+### 更新后的验证
+
+- `xcodebuild build-for-testing` 通过。
+- iPhone 17 Pro Simulator 中，排除缺少 Keychain entitlement 的单测后，45 个测试、7 个 suite 通过。
+- Keychain 生命周期测试在未签名 Simulator 测试进程中返回 `errSecMissingEntitlement`（`-34018`）；需在带 entitlement 的签名环境或真机复验。
+
+因此，本报告原先的“完成全部 High 与 Medium 后再标记通过”的门槛已满足；L-01、L-02 的剩余发布事项和运行时 UI/无障碍验证仍应在发布前完成。

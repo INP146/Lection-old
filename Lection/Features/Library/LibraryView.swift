@@ -9,6 +9,7 @@ struct LibraryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \ReadingDocument.updatedAt, order: .reverse)
     private var documents: [ReadingDocument]
+    @State private var deleteError: String?
 
     var body: some View {
         NavigationStack {
@@ -44,18 +45,35 @@ struct LibraryView: View {
                     Button("新建练习", systemImage: "plus", action: onCreate)
                 }
             }
+            .alert("无法删除资料", isPresented: Binding(
+                get: { deleteError != nil },
+                set: { if !$0 { deleteError = nil } }
+            )) {
+                Button("好", role: .cancel) {}
+            } message: {
+                Text(deleteError ?? "")
+            }
         }
     }
 
     private func deleteDocuments(at offsets: IndexSet) {
+        var didDelete = false
         for index in offsets {
             let document = documents[index]
             guard !document.processingJobs.contains(where: coordinator.isRunning) else {
                 continue
             }
             modelContext.delete(document)
+            didDelete = true
         }
-        try? modelContext.save()
+        guard didDelete else { return }
+
+        do {
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            deleteError = error.localizedDescription
+        }
     }
 }
 

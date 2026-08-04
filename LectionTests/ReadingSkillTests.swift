@@ -44,6 +44,9 @@ struct ReadingSkillTests {
 
         #expect(request.minimumParagraphCount == 5)
         #expect(request.maximumParagraphCount == 7)
+        #expect(request.minimumWordCount == 350)
+        #expect(request.maximumWordCount == 500)
+        #expect(request.preferredWordCount == 425)
         #expect(request.prompt.user.contains("general-english-reading"))
         #expect(request.prompt.user.contains("version: 1"))
         #expect(request.prompt.user.contains("350-500 English words"))
@@ -74,6 +77,7 @@ struct ReadingSkillTests {
         )
 
         #expect(request.expectedQuestionCount == 5)
+        #expect(request.questionPlan == skill.questionPlan)
         #expect(request.sourceParagraphs == paragraphs)
         #expect(request.prompt.user.contains(firstParagraphID.uuidString))
         #expect(request.prompt.user.contains(secondParagraphID.uuidString))

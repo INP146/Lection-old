@@ -288,6 +288,7 @@ private struct QuizPane: View {
             document.updatedAt = .now
             try modelContext.save()
         } catch {
+            modelContext.rollback()
             saveError = error.localizedDescription
         }
     }
@@ -297,7 +298,13 @@ private struct QuizPane: View {
         for question in questions {
             question.answeredAt = submittedAt
         }
-        saveSelection()
+        do {
+            document.updatedAt = submittedAt
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            saveError = error.localizedDescription
+        }
     }
 }
 

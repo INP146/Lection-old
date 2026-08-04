@@ -55,6 +55,7 @@ enum GenerationPipelineError: LocalizedError, Equatable, Sendable {
 final class GenerationPipeline {
     private let modelContext: ModelContext
     private let provider: any AIProvider
+    private let executionModelName: String?
     private let progressHandler: ((ProcessingJob) -> Void)?
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
@@ -62,10 +63,13 @@ final class GenerationPipeline {
     init(
         modelContext: ModelContext,
         provider: any AIProvider,
+        executionModelName: String? = nil,
         progressHandler: ((ProcessingJob) -> Void)? = nil
     ) {
         self.modelContext = modelContext
         self.provider = provider
+        self.executionModelName = executionModelName?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
         self.progressHandler = progressHandler
     }
 
@@ -271,6 +275,8 @@ final class GenerationPipeline {
             let question = Question(
                 id: UUID(),
                 order: order,
+                category: generated.category,
+                difficulty: generated.difficulty,
                 stem: generated.stem,
                 correctOptionID: optionIDs[generated.correctOptionID],
                 explanation: generated.explanation,
@@ -311,7 +317,9 @@ final class GenerationPipeline {
         for paragraph in document.paragraphs {
             paragraph.translatedText = translationsByID[paragraph.id]
             paragraph.translationLanguage = request.targetLanguage
-            paragraph.translationModel = request.translationModel
+            paragraph.translationModel = executionModelName?.isEmpty == false
+                ? executionModelName
+                : request.translationModel
         }
         job.stage = .validating
         touch(document: document, job: job)
@@ -348,6 +356,8 @@ final class GenerationPipeline {
             .map { question in
                 GeneratedQuestion(
                     id: question.id,
+                    category: question.category,
+                    difficulty: question.difficulty,
                     stem: question.stem,
                     options: question.options
                         .sorted { $0.order < $1.order }
@@ -426,7 +436,7 @@ final class GenerationPipeline {
                 return .modelNotFound
             case .rateLimited:
                 return .rateLimited
-            case .server, .invalidHTTPResponse, .invalidProviderResponse, .emptyResponse:
+            case .server, .invalidHTTPResponse, .invalidProviderResponse, .responseTooLarge, .emptyResponse:
                 return .provider
             case .outputDecodingFailed:
                 return .invalidOutput

@@ -7,6 +7,8 @@ final class Question {
     @Attribute(.unique) var id: UUID
     var order: Int
     var typeRawValue: String
+    var category: String = ""
+    var difficulty: String = ""
     var stem: String
     var correctOptionID: UUID?
     var referenceAnswer: String?
@@ -38,6 +40,8 @@ final class Question {
         id: UUID = UUID(),
         order: Int,
         type: QuestionType = .singleChoice,
+        category: String,
+        difficulty: String,
         stem: String,
         correctOptionID: UUID? = nil,
         referenceAnswer: String? = nil,
@@ -51,6 +55,8 @@ final class Question {
         self.id = id
         self.order = order
         self.typeRawValue = type.rawValue
+        self.category = category
+        self.difficulty = difficulty
         self.stem = stem
         self.correctOptionID = correctOptionID
         self.referenceAnswer = referenceAnswer
