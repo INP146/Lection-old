@@ -25,11 +25,11 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- 技能定义包含 `targetWordCount` 和带类别、数量、难度的 `questionPlan`：[ReadingSkill.swift](Lection/Models/ReadingSkill.swift#L13)、[ReadingSkill.swift](Lection/Models/ReadingSkill.swift#L17)。
-- Prompt 明确要求 350-500 词，并发送题型分布：[ReadingPromptBuilder.swift](Lection/AI/ReadingPromptBuilder.swift#L78)、[ReadingPromptBuilder.swift](Lection/AI/ReadingPromptBuilder.swift#L109)。
-- `ArticleGenerationRequest` 只携带段落数上下限；`GeneratedQuestion` 没有类别或难度字段：[AIProvider.swift](Lection/AI/AIProvider.swift#L34)、[AIProvider.swift](Lection/AI/AIProvider.swift#L97)。
-- 文章校验只检查标题、段落数、ID 和空文本；题目校验只检查题目总数，没有检查计划分布：[AIResponseValidator.swift](Lection/AI/AIResponseValidator.swift#L4)、[AIResponseValidator.swift](Lection/AI/AIResponseValidator.swift#L50)。
-- 这些校验通过后，Pipeline 直接把文档标记为 `.ready`：[GenerationPipeline.swift](Lection/AI/GenerationPipeline.swift#L186)。
+- 技能定义包含 `targetWordCount` 和带类别、数量、难度的 `questionPlan`：[ReadingSkill.swift](../Lection/Models/ReadingSkill.swift#L13)、[ReadingSkill.swift](../Lection/Models/ReadingSkill.swift#L17)。
+- Prompt 明确要求 350-500 词，并发送题型分布：[ReadingPromptBuilder.swift](../Lection/AI/ReadingPromptBuilder.swift#L78)、[ReadingPromptBuilder.swift](../Lection/AI/ReadingPromptBuilder.swift#L109)。
+- `ArticleGenerationRequest` 只携带段落数上下限；`GeneratedQuestion` 没有类别或难度字段：[AIProvider.swift](../Lection/AI/AIProvider.swift#L34)、[AIProvider.swift](../Lection/AI/AIProvider.swift#L97)。
+- 文章校验只检查标题、段落数、ID 和空文本；题目校验只检查题目总数，没有检查计划分布：[AIResponseValidator.swift](../Lection/AI/AIResponseValidator.swift#L4)、[AIResponseValidator.swift](../Lection/AI/AIResponseValidator.swift#L50)。
+- 这些校验通过后，Pipeline 直接把文档标记为 `.ready`：[GenerationPipeline.swift](../Lection/AI/GenerationPipeline.swift#L186)。
 
 **影响**
 
@@ -48,10 +48,10 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- Prompt 明确写着 `Provide exactly four distinct answer options`：[ReadingPromptBuilder.swift](Lection/AI/ReadingPromptBuilder.swift#L122)。
-- JSON Schema 只设置 `minItems: 3`，没有 `maxItems: 4`：[OpenAICompatibleProvider.swift](Lection/AI/OpenAICompatibleProvider.swift#L444)。
-- Validator 仅在少于 3 个选项时报错：[AIResponseValidator.swift](Lection/AI/AIResponseValidator.swift#L73)。
-- 持久化测试还明确断言 3 个选项是合法结果：[PersistenceTests.swift](LectionTests/PersistenceTests.swift#L38)。
+- Prompt 明确写着 `Provide exactly four distinct answer options`：[ReadingPromptBuilder.swift](../Lection/AI/ReadingPromptBuilder.swift#L122)。
+- JSON Schema 只设置 `minItems: 3`，没有 `maxItems: 4`：[OpenAICompatibleProvider.swift](../Lection/AI/OpenAICompatibleProvider.swift#L444)。
+- Validator 仅在少于 3 个选项时报错：[AIResponseValidator.swift](../Lection/AI/AIResponseValidator.swift#L73)。
+- 持久化测试还明确断言 3 个选项是合法结果：[PersistenceTests.swift](../LectionTests/PersistenceTests.swift#L38)。
 
 **影响**
 
@@ -67,9 +67,9 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- 创建任务时把当时的模型名写入可恢复请求：[NewPracticeView.swift](Lection/Features/Create/NewPracticeView.swift#L131)。
-- 重试/恢复时 Provider 使用当前最新设置创建：[GenerationCoordinator.swift](Lection/Features/Create/GenerationCoordinator.swift#L157)。
-- 翻译完成后，Paragraph 写入的却是恢复请求中的旧 `translationModel`：[GenerationPipeline.swift](Lection/AI/GenerationPipeline.swift#L311)。
+- 创建任务时把当时的模型名写入可恢复请求：[NewPracticeView.swift](../Lection/Features/Create/NewPracticeView.swift#L131)。
+- 重试/恢复时 Provider 使用当前最新设置创建：[GenerationCoordinator.swift](../Lection/Features/Create/GenerationCoordinator.swift#L157)。
+- 翻译完成后，Paragraph 写入的却是恢复请求中的旧 `translationModel`：[GenerationPipeline.swift](../Lection/AI/GenerationPipeline.swift#L311)。
 
 **复现场景**
 
@@ -92,9 +92,9 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- `testConnection()` 在 `await` 前捕获配置和 API Key：[ProviderSettings.swift](Lection/Features/Settings/ProviderSettings.swift#L92)。
-- `settings.isBusy` 只禁用了底部操作 Section：[SettingsView.swift](Lection/Features/Settings/SettingsView.swift#L68)。
-- Base URL、模型名、结构化输出开关、API Key 输入和删除按钮仍保持可操作：[SettingsView.swift](Lection/Features/Settings/SettingsView.swift#L12)、[SettingsView.swift](Lection/Features/Settings/SettingsView.swift#L29)、[SettingsView.swift](Lection/Features/Settings/SettingsView.swift#L34)。
+- `testConnection()` 在 `await` 前捕获配置和 API Key：[ProviderSettings.swift](../Lection/Features/Settings/ProviderSettings.swift#L92)。
+- `settings.isBusy` 只禁用了底部操作 Section：[SettingsView.swift](../Lection/Features/Settings/SettingsView.swift#L68)。
+- Base URL、模型名、结构化输出开关、API Key 输入和删除按钮仍保持可操作：[SettingsView.swift](../Lection/Features/Settings/SettingsView.swift#L12)、[SettingsView.swift](../Lection/Features/Settings/SettingsView.swift#L29)、[SettingsView.swift](../Lection/Features/Settings/SettingsView.swift#L34)。
 
 **影响**
 
@@ -109,7 +109,7 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- 删除后使用 `try? modelContext.save()`，没有回滚或用户提示：[LibraryView.swift](Lection/Features/Library/LibraryView.swift#L50)。
+- 删除后使用 `try? modelContext.save()`，没有回滚或用户提示：[LibraryView.swift](../Lection/Features/Library/LibraryView.swift#L50)。
 
 **影响**
 
@@ -125,9 +125,9 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- `submitQuiz()` 先给所有题设置 `answeredAt`，再尝试保存：[ReadingPracticeView.swift](Lection/Features/Reading/ReadingPracticeView.swift#L295)。
-- 保存失败只设置 Alert 文本，没有回滚模型状态：[ReadingPracticeView.swift](Lection/Features/Reading/ReadingPracticeView.swift#L286)。
-- `answeredAt` 全部非空后，选项被禁用且提交按钮消失：[ReadingPracticeView.swift](Lection/Features/Reading/ReadingPracticeView.swift#L204)、[ReadingPracticeView.swift](Lection/Features/Reading/ReadingPracticeView.swift#L237)。
+- `submitQuiz()` 先给所有题设置 `answeredAt`，再尝试保存：[ReadingPracticeView.swift](../Lection/Features/Reading/ReadingPracticeView.swift#L295)。
+- 保存失败只设置 Alert 文本，没有回滚模型状态：[ReadingPracticeView.swift](../Lection/Features/Reading/ReadingPracticeView.swift#L286)。
+- `answeredAt` 全部非空后，选项被禁用且提交按钮消失：[ReadingPracticeView.swift](../Lection/Features/Reading/ReadingPracticeView.swift#L204)、[ReadingPracticeView.swift](../Lection/Features/Reading/ReadingPracticeView.swift#L237)。
 
 **影响**
 
@@ -143,7 +143,7 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- AppIcon catalog 只有 1024x1024 槽位，没有 `filename`，目录中也没有位图文件：[Contents.json](Lection/Assets.xcassets/AppIcon.appiconset/Contents.json#L1)。
+- AppIcon catalog 只有 1024x1024 槽位，没有 `filename`，目录中也没有位图文件：[Contents.json](../Lection/Assets.xcassets/AppIcon.appiconset/Contents.json#L1)。
 - 工程指定 `ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon`，但实际没有可编译图标。
 
 **影响**
@@ -158,8 +158,8 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 **证据**
 
-- Chat Completions payload 只有 `model`、`messages`、`response_format`：[OpenAICompatibleProvider.swift](Lection/AI/OpenAICompatibleProvider.swift#L153)、[OpenAICompatibleProvider.swift](Lection/AI/OpenAICompatibleProvider.swift#L266)。
-- 生成响应通过 `dataLoader.data(for:)` 一次性读入内存：[OpenAICompatibleProvider.swift](Lection/AI/OpenAICompatibleProvider.swift#L179)；默认 loader 最终调用 `URLSession.data(for:)`：[ProviderConnectionTester.swift](Lection/AI/ProviderConnectionTester.swift#L7)。
+- Chat Completions payload 只有 `model`、`messages`、`response_format`：[OpenAICompatibleProvider.swift](../Lection/AI/OpenAICompatibleProvider.swift#L153)、[OpenAICompatibleProvider.swift](../Lection/AI/OpenAICompatibleProvider.swift#L266)。
+- 生成响应通过 `dataLoader.data(for:)` 一次性读入内存：[OpenAICompatibleProvider.swift](../Lection/AI/OpenAICompatibleProvider.swift#L179)；默认 loader 最终调用 `URLSession.data(for:)`：[ProviderConnectionTester.swift](../Lection/AI/ProviderConnectionTester.swift#L7)。
 - 代码虽然把自动 repair 限制为一次，但单次生成量仍完全由供应商默认值决定。
 
 **影响**
