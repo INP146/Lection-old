@@ -1,7 +1,7 @@
 import Foundation
 import SwiftData
 
-/// 本地保存的一篇阅读材料。段落、题目等内容会在后续通过关系模型接入。
+/// 本地保存的一篇阅读材料，也是段落、题目和处理任务的聚合根。
 @Model
 final class ReadingDocument {
     @Attribute(.unique) var id: UUID
@@ -15,6 +15,16 @@ final class ReadingDocument {
     var skillVersion: Int?
     var createdAt: Date
     var updatedAt: Date
+
+    // ReadingDocument 是本地内容的聚合根。级联删除保证移除资料时不会残留子对象。
+    @Relationship(deleteRule: .cascade, inverse: \Paragraph.document)
+    var paragraphs: [Paragraph] = []
+
+    @Relationship(deleteRule: .cascade, inverse: \Question.document)
+    var questions: [Question] = []
+
+    @Relationship(deleteRule: .cascade, inverse: \ProcessingJob.document)
+    var processingJobs: [ProcessingJob] = []
 
     /// 业务代码使用的类型安全来源；遇到无法识别的旧值时回退为生成内容。
     var sourceType: DocumentSourceType {
