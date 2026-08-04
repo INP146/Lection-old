@@ -11,6 +11,7 @@
 		4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB86238B33BA404D2C9F538 /* ContentView.swift */; };
 		5F2E03E22E8DCEB472E7FD51 /* LectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C33C0305D1E2B20C6124A4 /* LectionApp.swift */; };
 		A1B2C3D4E5F60718293A4B5C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */; };
+		E5F60718293A4B5C6D7E8F90 /* NewPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		636B82AD9B459A906A0176D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		DCB86238B33BA404D2C9F538 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPracticeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -44,9 +46,18 @@
 		C3D4E5F60718293A4B5C6D7E /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0718293A4B5C6D7E8F901A2B /* Create */,
 				D4E5F60718293A4B5C6D7E8F /* Library */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		0718293A4B5C6D7E8F901A2B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 		D4E5F60718293A4B5C6D7E8F /* Library */ = {
@@ -136,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */,
+				E5F60718293A4B5C6D7E8F90 /* NewPracticeView.swift in Sources */,
 				5F2E03E22E8DCEB472E7FD51 /* LectionApp.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* LibraryView.swift in Sources */,
 			);

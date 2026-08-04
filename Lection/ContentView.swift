@@ -12,10 +12,7 @@ struct ContentView: View {
             }
 
             Tab("新建", systemImage: "plus", value: .create) {
-                NavigationStack {
-                    Color.clear
-                        .navigationTitle("新建练习")
-                }
+                NewPracticeView()
             }
 
             Tab("设置", systemImage: "gearshape", value: .settings) {
