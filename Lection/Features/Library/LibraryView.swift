@@ -18,7 +18,7 @@ struct LibraryView: View {
                         Label("还没有阅读材料", systemImage: "books.vertical")
                     } actions: {
                         Button("新建练习", systemImage: "plus", action: onCreate)
-                            .buttonStyle(.glassProminent)
+                            .buttonStyle(.borderedProminent)
                     }
                 } else {
                     List {
@@ -143,12 +143,12 @@ private struct ProcessingDocumentView: View {
                 Button("从失败步骤重试", systemImage: "arrow.clockwise") {
                     coordinator.retry(job, modelContext: modelContext)
                 }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.borderedProminent)
             } else if job.stage != .completed {
                 Button("继续生成", systemImage: "play.fill") {
                     coordinator.resume(job, modelContext: modelContext)
                 }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.borderedProminent)
             }
         }
     }

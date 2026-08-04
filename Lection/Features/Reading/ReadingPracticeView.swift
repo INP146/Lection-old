@@ -241,7 +241,7 @@ private struct QuizPane: View {
                         Label("提交答案", systemImage: "checkmark.circle")
                             .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.glassProminent)
+                    .buttonStyle(.borderedProminent)
                     .disabled(!canSubmit)
                     .padding(.vertical, 24)
                 }

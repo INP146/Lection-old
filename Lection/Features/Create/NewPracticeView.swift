@@ -111,7 +111,7 @@ struct NewPracticeView: View {
             Label("开始生成", systemImage: "sparkles")
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.glassProminent)
+        .buttonStyle(.borderedProminent)
         .disabled(
             topic.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
                 || providerIssue != nil
