@@ -32,6 +32,10 @@
 		800000000000000000000005 /* AIResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000005 /* AIResponseValidatorTests.swift */; };
 		800000000000000000000006 /* MockAIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000006 /* MockAIProvider.swift */; };
 		800000000000000000000007 /* OpenAICompatibleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000007 /* OpenAICompatibleProviderTests.swift */; };
+		A00000000000000000000001 /* ReadingSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* ReadingSkill.swift */; };
+		A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* ReadingPromptBuilder.swift */; };
+		A00000000000000000000003 /* general-english-reading.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* general-english-reading.json */; };
+		A00000000000000000000004 /* ReadingSkillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* ReadingSkillTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,10 @@
 		900000000000000000000005 /* AIResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponseValidatorTests.swift; sourceTree = "<group>"; };
 		900000000000000000000006 /* MockAIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAIProvider.swift; sourceTree = "<group>"; };
 		900000000000000000000007 /* OpenAICompatibleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAICompatibleProviderTests.swift; sourceTree = "<group>"; };
+		A10000000000000000000001 /* ReadingSkill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingSkill.swift; sourceTree = "<group>"; };
+		A10000000000000000000002 /* ReadingPromptBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPromptBuilder.swift; sourceTree = "<group>"; };
+		A10000000000000000000003 /* general-english-reading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "general-english-reading.json"; sourceTree = "<group>"; };
+		A10000000000000000000004 /* ReadingSkillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingSkillTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,7 @@
 				05C33C0305D1E2B20C6124A4 /* LectionApp.swift */,
 				6D7E8F901A2B3C4D5E6F7081 /* Models */,
 				300000000000000000000001 /* Persistence */,
+				A20000000000000000000001 /* Resources */,
 				700000000000000000000002 /* Security */,
 			);
 			path = Lection;
@@ -115,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				5C6D7E8F901A2B3C4D5E6F70 /* ReadingDocument.swift */,
+				A10000000000000000000001 /* ReadingSkill.swift */,
 				200000000000000000000001 /* Paragraph.swift */,
 				200000000000000000000002 /* Question.swift */,
 				200000000000000000000003 /* ProcessingJob.swift */,
@@ -183,6 +193,7 @@
 				900000000000000000000007 /* OpenAICompatibleProviderTests.swift */,
 				400000000000000000000002 /* PersistenceTests.swift */,
 				600000000000000000000005 /* ProviderSettingsTests.swift */,
+				A10000000000000000000004 /* ReadingSkillTests.swift */,
 			);
 			path = LectionTests;
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 				900000000000000000000004 /* OpenAICompatibleProvider.swift */,
 				600000000000000000000001 /* ProviderConfiguration.swift */,
 				600000000000000000000002 /* ProviderConnectionTester.swift */,
+				A10000000000000000000002 /* ReadingPromptBuilder.swift */,
 				900000000000000000000003 /* StructuredResponseDecoder.swift */,
 			);
 			path = AI;
@@ -206,6 +218,14 @@
 				600000000000000000000003 /* KeychainStore.swift */,
 			);
 			path = Security;
+			sourceTree = "<group>";
+		};
+		A20000000000000000000001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000003 /* general-english-reading.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2BFA5C8A76626213C5EC8D /* Assets.xcassets in Resources */,
+				A00000000000000000000003 /* general-english-reading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +336,7 @@
 				800000000000000000000007 /* OpenAICompatibleProviderTests.swift in Sources */,
 				400000000000000000000001 /* PersistenceTests.swift in Sources */,
 				500000000000000000000005 /* ProviderSettingsTests.swift in Sources */,
+				A00000000000000000000004 /* ReadingSkillTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +348,7 @@
 				800000000000000000000002 /* AIResponseValidator.swift in Sources */,
 				800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */,
 				800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */,
+				A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */,
 				500000000000000000000001 /* ProviderConfiguration.swift in Sources */,
 				500000000000000000000002 /* ProviderConnectionTester.swift in Sources */,
 				500000000000000000000003 /* KeychainStore.swift in Sources */,
@@ -333,6 +356,7 @@
 				18293A4B5C6D7E8F901A2B3C /* SettingsView.swift in Sources */,
 				4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */,
 				4B5C6D7E8F901A2B3C4D5E6F /* ReadingDocument.swift in Sources */,
+				A00000000000000000000001 /* ReadingSkill.swift in Sources */,
 				100000000000000000000001 /* Paragraph.swift in Sources */,
 				100000000000000000000002 /* Question.swift in Sources */,
 				100000000000000000000003 /* ProcessingJob.swift in Sources */,

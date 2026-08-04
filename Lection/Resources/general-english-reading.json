@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "general-english-reading",
+  "version": 1,
+  "displayName": "通用英语阅读",
+  "stage": "CEFR B1 intermediate",
+  "supportedGenres": [
+    "narrative",
+    "expository",
+    "popular science"
+  ],
+  "targetWordCount": {
+    "minimum": 350,
+    "maximum": 500
+  },
+  "paragraphCount": {
+    "minimum": 5,
+    "maximum": 7
+  },
+  "grammarRequirements": [
+    "Use mostly simple and compound sentences with some controlled complex sentences",
+    "Use clear pronoun references and explicit logical connectors",
+    "Keep tense changes purposeful and easy to follow"
+  ],
+  "vocabularyConstraints": {
+    "targetLevel": "CEFR B1",
+    "maximumUnfamiliarWordRatio": 0.05,
+    "requirements": [
+      "Prefer high-frequency general English",
+      "Make unfamiliar words understandable from context",
+      "Avoid unexplained specialist terminology"
+    ]
+  },
+  "questionPlan": [
+    {
+      "category": "detail comprehension",
+      "count": 2,
+      "difficulty": "easy to medium"
+    },
+    {
+      "category": "main idea",
+      "count": 1,
+      "difficulty": "medium"
+    },
+    {
+      "category": "inference",
+      "count": 1,
+      "difficulty": "medium"
+    },
+    {
+      "category": "vocabulary in context",
+      "count": 1,
+      "difficulty": "medium"
+    }
+  ],
+  "distractorRules": [
+    "Use plausible misunderstandings of the passage rather than unrelated statements",
+    "Keep options similar in length and grammatical form",
+    "Do not use trick wording, all-of-the-above, or none-of-the-above",
+    "Ensure only one option is defensibly correct"
+  ],
+  "prohibitedContent": [
+    "graphic violence",
+    "sexual content",
+    "instructions for dangerous or illegal acts",
+    "real-person defamation"
+  ],
+  "promptInstructions": "Create a self-contained passage with a clear structure, age-appropriate subject matter, and enough explicit evidence to support every question."
+}

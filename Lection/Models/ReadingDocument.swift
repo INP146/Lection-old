@@ -57,6 +57,12 @@ final class ReadingDocument {
         self.createdAt = createdAt
         self.updatedAt = updatedAt ?? createdAt
     }
+
+    /// 生成草稿时成对记录技能 ID 和版本，保证内容规则可追溯。
+    func recordGenerationSkill(_ skill: ReadingSkill) {
+        skillID = skill.id
+        skillVersion = skill.version
+    }
 }
 
 /// 阅读材料最初进入 App 的方式。
