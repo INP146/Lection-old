@@ -70,13 +70,13 @@ final class GenerationCoordinator {
     }
 
     func resume(_ job: ProcessingJob, modelContext: ModelContext) {
-        launch(modelContext: modelContext) { pipeline in
+        launch(job: job, modelContext: modelContext) { pipeline in
             try await pipeline.resume(job)
         }
     }
 
     func retry(_ job: ProcessingJob, modelContext: ModelContext) {
-        launch(modelContext: modelContext) { pipeline in
+        launch(job: job, modelContext: modelContext) { pipeline in
             try await pipeline.retry(job)
         }
     }
@@ -95,15 +95,16 @@ final class GenerationCoordinator {
     }
 
     private func launch(
+        job: ProcessingJob? = nil,
         modelContext: ModelContext,
         operation: @escaping @MainActor (GenerationPipeline) async throws -> ReadingDocument
     ) {
         guard !isRunning else { return }
 
         phase = .preparing
-        stage = nil
-        activeJobID = nil
-        document = nil
+        stage = job?.stage
+        activeJobID = job?.id
+        document = job?.document
         message = nil
 
         operationTask = Task { @MainActor [weak self] in

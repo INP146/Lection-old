@@ -47,6 +47,29 @@ struct GenerationPipelineTests {
         #expect(await provider.callCounts() == .init(article: 1, questions: 1, translation: 1))
     }
 
+    @Test("Repeated provider IDs cannot merge content across documents")
+    func repeatedProviderIDsStayDocumentScoped() async throws {
+        let container = try LectionSchema.makeContainer(isStoredInMemoryOnly: true)
+        let provider = PipelineTestProvider(fixtures: makeFixtures())
+        let pipeline = GenerationPipeline(modelContext: container.mainContext, provider: provider)
+
+        let first = try await pipeline.start(makeRequest())
+        let firstParagraphIDs = Set(first.paragraphs.map(\.id))
+        let firstQuestionIDs = Set(first.questions.map(\.id))
+        let firstOptionIDs = Set(first.questions.flatMap(\.options).map(\.id))
+
+        let second = try await pipeline.start(makeRequest())
+
+        #expect(try container.mainContext.fetchCount(FetchDescriptor<ReadingDocument>()) == 2)
+        #expect(first.paragraphs.count == 5)
+        #expect(first.questions.count == 5)
+        #expect(second.paragraphs.count == 5)
+        #expect(second.questions.count == 5)
+        #expect(firstParagraphIDs.isDisjoint(with: Set(second.paragraphs.map(\.id))))
+        #expect(firstQuestionIDs.isDisjoint(with: Set(second.questions.map(\.id))))
+        #expect(firstOptionIDs.isDisjoint(with: Set(second.questions.flatMap(\.options).map(\.id))))
+    }
+
     @Test("Article failure leaves an empty draft and retries from article")
     func retriesArticleFailure() async throws {
         let container = try LectionSchema.makeContainer(isStoredInMemoryOnly: true)
@@ -393,7 +416,22 @@ private actor PipelineTestProvider: AIProvider {
     func generateQuestions(request: QuestionGenerationRequest) async throws -> [GeneratedQuestion] {
         counts.questions += 1
         try failIfNeeded(at: .questions)
-        return fixtures.questions
+        let paragraphIDs = Dictionary(
+            uniqueKeysWithValues: zip(fixtures.article.paragraphs, request.sourceParagraphs)
+                .map { articleParagraph, sourceParagraph in
+                    (articleParagraph.id, sourceParagraph.id)
+                }
+        )
+        return fixtures.questions.map { question in
+            GeneratedQuestion(
+                id: question.id,
+                stem: question.stem,
+                options: question.options,
+                correctOptionID: question.correctOptionID,
+                explanation: question.explanation,
+                evidenceParagraphIDs: question.evidenceParagraphIDs.compactMap { paragraphIDs[$0] }
+            )
+        }
     }
 
     func translateParagraphs(request: TranslationRequest) async throws -> [ParagraphTranslation] {
@@ -404,7 +442,12 @@ private actor PipelineTestProvider: AIProvider {
             suspendedTranslationAttempts -= 1
             try await Task.sleep(for: .seconds(60))
         }
-        return fixtures.translations
+        return zip(fixtures.translations, request.sourceParagraphs).map { translation, source in
+            ParagraphTranslation(
+                paragraphID: source.id,
+                translatedText: translation.translatedText
+            )
+        }
     }
 
     func callCounts() -> CallCounts {

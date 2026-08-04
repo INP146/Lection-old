@@ -242,7 +242,7 @@ final class GenerationPipeline {
 
         document.title = article.title
         document.paragraphs = article.paragraphs.enumerated().map { order, paragraph in
-            Paragraph(id: paragraph.id, order: order, originalText: paragraph.text)
+            Paragraph(id: UUID(), order: order, originalText: paragraph.text)
         }
         job.stage = .generatingQuestions
         touch(document: document, job: job)
@@ -265,16 +265,23 @@ final class GenerationPipeline {
         try AIResponseValidator.validate(questions: generatedQuestions, for: providerRequest)
 
         document.questions = generatedQuestions.enumerated().map { order, generated in
+            let optionIDs = Dictionary(
+                uniqueKeysWithValues: generated.options.map { ($0.id, UUID()) }
+            )
             let question = Question(
-                id: generated.id,
+                id: UUID(),
                 order: order,
                 stem: generated.stem,
-                correctOptionID: generated.correctOptionID,
+                correctOptionID: optionIDs[generated.correctOptionID],
                 explanation: generated.explanation,
                 evidenceParagraphIDs: generated.evidenceParagraphIDs
             )
             question.options = generated.options.enumerated().map { optionOrder, option in
-                QuestionOption(id: option.id, order: optionOrder, text: option.text)
+                QuestionOption(
+                    id: optionIDs[option.id] ?? UUID(),
+                    order: optionOrder,
+                    text: option.text
+                )
             }
             return question
         }

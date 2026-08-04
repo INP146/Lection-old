@@ -103,6 +103,10 @@ private struct ProcessingDocumentView: View {
                     } else if let error = job.lastError {
                         Text(error)
                             .foregroundStyle(.secondary)
+                    } else if coordinator.activeJobID == job.id,
+                              let message = coordinator.message {
+                        Text(message)
+                            .foregroundStyle(.secondary)
                     }
                 } else {
                     Label("任务数据缺失", systemImage: "exclamationmark.triangle")
@@ -140,13 +144,19 @@ private struct ProcessingDocumentView: View {
                     .foregroundStyle(.orange)
                 Button("前往设置", systemImage: "gearshape", action: onOpenSettings)
             } else if job.stage == .failed || job.stage == .cancelled {
-                Button("从失败步骤重试", systemImage: "arrow.clockwise") {
+                Button {
                     coordinator.retry(job, modelContext: modelContext)
+                } label: {
+                    Label("从失败步骤重试", systemImage: "arrow.clockwise")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
             } else if job.stage != .completed {
-                Button("继续生成", systemImage: "play.fill") {
+                Button {
                     coordinator.resume(job, modelContext: modelContext)
+                } label: {
+                    Label("继续生成", systemImage: "play.fill")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -180,24 +190,25 @@ private struct ProcessingDocumentView: View {
 private struct DocumentRow: View {
     let document: ReadingDocument
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(document.title)
                 .font(.headline)
                 .lineLimit(2)
 
-            HStack(spacing: 12) {
-                Label(
-                    rowStatusTitle,
-                    systemImage: document.state.systemImage
-                )
-                .foregroundStyle(document.state.tint)
-
-                Text("\(document.paragraphs.count) 段")
-                Text("\(document.questions.count) 题")
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 6) {
+                    statusLabel
+                    countLabels
+                }
+            } else {
+                HStack(spacing: 12) {
+                    statusLabel
+                    countLabels
+                }
             }
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
         }
         .padding(.vertical, 6)
     }
@@ -213,6 +224,25 @@ private struct DocumentRow: View {
             return "已暂停 · \(failedStage.displayTitle)"
         }
         return job.stage.displayTitle
+    }
+
+    private var statusLabel: some View {
+        HStack(spacing: 6) {
+            Image(systemName: document.state.systemImage)
+            Text(rowStatusTitle)
+        }
+        .font(.subheadline)
+        .foregroundStyle(document.state.tint)
+    }
+
+    private var countLabels: some View {
+        HStack(spacing: 12) {
+            Text("\(document.paragraphs.count) 段")
+            Text("\(document.questions.count) 题")
+        }
+        .font(.subheadline)
+        .foregroundStyle(.secondary)
+        .fixedSize(horizontal: true, vertical: false)
     }
 }
 
