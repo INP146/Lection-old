@@ -25,6 +25,13 @@
 		500000000000000000000003 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000003 /* KeychainStore.swift */; };
 		500000000000000000000004 /* ProviderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000004 /* ProviderSettings.swift */; };
 		500000000000000000000005 /* ProviderSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000005 /* ProviderSettingsTests.swift */; };
+		800000000000000000000001 /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000001 /* AIProvider.swift */; };
+		800000000000000000000002 /* AIResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000002 /* AIResponseValidator.swift */; };
+		800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000003 /* StructuredResponseDecoder.swift */; };
+		800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000004 /* OpenAICompatibleProvider.swift */; };
+		800000000000000000000005 /* AIResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000005 /* AIResponseValidatorTests.swift */; };
+		800000000000000000000006 /* MockAIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000006 /* MockAIProvider.swift */; };
+		800000000000000000000007 /* OpenAICompatibleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900000000000000000000007 /* OpenAICompatibleProviderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +66,13 @@
 		600000000000000000000004 /* ProviderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettings.swift; sourceTree = "<group>"; };
 		600000000000000000000005 /* ProviderSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettingsTests.swift; sourceTree = "<group>"; };
 		600000000000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		900000000000000000000001 /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
+		900000000000000000000002 /* AIResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponseValidator.swift; sourceTree = "<group>"; };
+		900000000000000000000003 /* StructuredResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredResponseDecoder.swift; sourceTree = "<group>"; };
+		900000000000000000000004 /* OpenAICompatibleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAICompatibleProvider.swift; sourceTree = "<group>"; };
+		900000000000000000000005 /* AIResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponseValidatorTests.swift; sourceTree = "<group>"; };
+		900000000000000000000006 /* MockAIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAIProvider.swift; sourceTree = "<group>"; };
+		900000000000000000000007 /* OpenAICompatibleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAICompatibleProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +178,9 @@
 		400000000000000000000006 /* LectionTests */ = {
 			isa = PBXGroup;
 			children = (
+				900000000000000000000005 /* AIResponseValidatorTests.swift */,
+				900000000000000000000006 /* MockAIProvider.swift */,
+				900000000000000000000007 /* OpenAICompatibleProviderTests.swift */,
 				400000000000000000000002 /* PersistenceTests.swift */,
 				600000000000000000000005 /* ProviderSettingsTests.swift */,
 			);
@@ -173,8 +190,12 @@
 		700000000000000000000001 /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				900000000000000000000001 /* AIProvider.swift */,
+				900000000000000000000002 /* AIResponseValidator.swift */,
+				900000000000000000000004 /* OpenAICompatibleProvider.swift */,
 				600000000000000000000001 /* ProviderConfiguration.swift */,
 				600000000000000000000002 /* ProviderConnectionTester.swift */,
+				900000000000000000000003 /* StructuredResponseDecoder.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -289,6 +310,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800000000000000000000005 /* AIResponseValidatorTests.swift in Sources */,
+				800000000000000000000006 /* MockAIProvider.swift in Sources */,
+				800000000000000000000007 /* OpenAICompatibleProviderTests.swift in Sources */,
 				400000000000000000000001 /* PersistenceTests.swift in Sources */,
 				500000000000000000000005 /* ProviderSettingsTests.swift in Sources */,
 			);
@@ -298,6 +322,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800000000000000000000001 /* AIProvider.swift in Sources */,
+				800000000000000000000002 /* AIResponseValidator.swift in Sources */,
+				800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */,
+				800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */,
 				500000000000000000000001 /* ProviderConfiguration.swift in Sources */,
 				500000000000000000000002 /* ProviderConnectionTester.swift in Sources */,
 				500000000000000000000003 /* KeychainStore.swift in Sources */,
