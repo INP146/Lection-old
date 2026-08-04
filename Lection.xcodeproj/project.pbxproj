@@ -36,6 +36,8 @@
 		A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* ReadingPromptBuilder.swift */; };
 		A00000000000000000000003 /* general-english-reading.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* general-english-reading.json */; };
 		A00000000000000000000004 /* ReadingSkillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* ReadingSkillTests.swift */; };
+		B00000000000000000000001 /* GenerationPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* GenerationPipeline.swift */; };
+		B00000000000000000000002 /* GenerationPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* GenerationPipelineTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		A10000000000000000000002 /* ReadingPromptBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPromptBuilder.swift; sourceTree = "<group>"; };
 		A10000000000000000000003 /* general-english-reading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "general-english-reading.json"; sourceTree = "<group>"; };
 		A10000000000000000000004 /* ReadingSkillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingSkillTests.swift; sourceTree = "<group>"; };
+		B10000000000000000000001 /* GenerationPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipeline.swift; sourceTree = "<group>"; };
+		B10000000000000000000002 /* GenerationPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipelineTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,7 @@
 		400000000000000000000006 /* LectionTests */ = {
 			isa = PBXGroup;
 			children = (
+				B10000000000000000000002 /* GenerationPipelineTests.swift */,
 				900000000000000000000005 /* AIResponseValidatorTests.swift */,
 				900000000000000000000006 /* MockAIProvider.swift */,
 				900000000000000000000007 /* OpenAICompatibleProviderTests.swift */,
@@ -203,6 +208,7 @@
 			children = (
 				900000000000000000000001 /* AIProvider.swift */,
 				900000000000000000000002 /* AIResponseValidator.swift */,
+				B10000000000000000000001 /* GenerationPipeline.swift */,
 				900000000000000000000004 /* OpenAICompatibleProvider.swift */,
 				600000000000000000000001 /* ProviderConfiguration.swift */,
 				600000000000000000000002 /* ProviderConnectionTester.swift */,
@@ -331,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00000000000000000000002 /* GenerationPipelineTests.swift in Sources */,
 				800000000000000000000005 /* AIResponseValidatorTests.swift in Sources */,
 				800000000000000000000006 /* MockAIProvider.swift in Sources */,
 				800000000000000000000007 /* OpenAICompatibleProviderTests.swift in Sources */,
@@ -346,6 +353,7 @@
 			files = (
 				800000000000000000000001 /* AIProvider.swift in Sources */,
 				800000000000000000000002 /* AIResponseValidator.swift in Sources */,
+				B00000000000000000000001 /* GenerationPipeline.swift in Sources */,
 				800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */,
 				800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */,
 				A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */,

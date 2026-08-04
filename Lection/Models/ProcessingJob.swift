@@ -8,6 +8,7 @@ final class ProcessingJob {
     var stageRawValue: String
     var failedStageRawValue: String?
     var retryCount: Int
+    var lastErrorCodeRawValue: String?
     var lastError: String?
     var intermediatePayload: Data?
     var createdAt: Date
@@ -26,11 +27,17 @@ final class ProcessingJob {
         set { failedStageRawValue = newValue?.rawValue }
     }
 
+    var lastErrorCode: ProcessingErrorCode? {
+        get { lastErrorCodeRawValue.flatMap(ProcessingErrorCode.init(rawValue:)) }
+        set { lastErrorCodeRawValue = newValue?.rawValue }
+    }
+
     init(
         id: UUID = UUID(),
         stage: ProcessingStage,
         failedStage: ProcessingStage? = nil,
         retryCount: Int = 0,
+        lastErrorCode: ProcessingErrorCode? = nil,
         lastError: String? = nil,
         intermediatePayload: Data? = nil,
         createdAt: Date = .now,
@@ -40,6 +47,7 @@ final class ProcessingJob {
         self.stageRawValue = stage.rawValue
         self.failedStageRawValue = failedStage?.rawValue
         self.retryCount = retryCount
+        self.lastErrorCodeRawValue = lastErrorCode?.rawValue
         self.lastError = lastError
         self.intermediatePayload = intermediatePayload
         self.createdAt = createdAt
@@ -48,7 +56,7 @@ final class ProcessingJob {
 }
 
 /// 同时覆盖第一阶段生成流程与后续导入流程，避免持久化状态迁移时改写旧记录。
-enum ProcessingStage: String, Codable {
+enum ProcessingStage: String, Codable, Sendable {
     case extracting
     case classifying
     case structuring
@@ -57,5 +65,23 @@ enum ProcessingStage: String, Codable {
     case translating
     case validating
     case completed
+    case cancelled
     case failed
+}
+
+/// 只持久化可展示、可分支处理的错误类别，不保存模型原始响应。
+enum ProcessingErrorCode: String, Codable, Sendable {
+    case invalidInput
+    case timeout
+    case network
+    case invalidAPIKey
+    case modelNotFound
+    case rateLimited
+    case provider
+    case invalidOutput
+    case validation
+    case persistence
+    case invalidState
+    case cancelled
+    case unknown
 }
