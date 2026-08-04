@@ -6,6 +6,7 @@ struct ReadingGenerationRequest: Codable, Equatable, Sendable {
     let genre: String?
     let targetLanguage: String
     let translationModel: String?
+    let targetWordCount: Int?
     let skill: ReadingSkill
 
     init(
@@ -13,12 +14,14 @@ struct ReadingGenerationRequest: Codable, Equatable, Sendable {
         genre: String? = nil,
         targetLanguage: String = "zh-Hans",
         translationModel: String? = nil,
+        targetWordCount: Int? = nil,
         skill: ReadingSkill
     ) {
         self.topic = topic
         self.genre = genre
         self.targetLanguage = targetLanguage
         self.translationModel = translationModel
+        self.targetWordCount = targetWordCount
         self.skill = skill
     }
 }
@@ -52,12 +55,18 @@ enum GenerationPipelineError: LocalizedError, Equatable, Sendable {
 final class GenerationPipeline {
     private let modelContext: ModelContext
     private let provider: any AIProvider
+    private let progressHandler: ((ProcessingJob) -> Void)?
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
-    init(modelContext: ModelContext, provider: any AIProvider) {
+    init(
+        modelContext: ModelContext,
+        provider: any AIProvider,
+        progressHandler: ((ProcessingJob) -> Void)? = nil
+    ) {
         self.modelContext = modelContext
         self.provider = provider
+        self.progressHandler = progressHandler
     }
 
     /// 创建可恢复草稿并执行完整流水线。即使后续失败，返回前草稿也已经进入 Store。
@@ -66,7 +75,8 @@ final class GenerationPipeline {
         _ = try ArticlePromptBuilder.makeRequest(
             skill: request.skill,
             topic: request.topic,
-            genre: request.genre
+            genre: request.genre,
+            preferredWordCount: request.targetWordCount
         )
         _ = try TranslationPromptBuilder.makeRequest(
             sourceParagraphs: [.init(id: UUID(), text: "validation")],
@@ -93,6 +103,7 @@ final class GenerationPipeline {
         document.processingJobs = [job]
         modelContext.insert(document)
         try saveContext()
+        reportProgress(job)
 
         try await execute(job: job, request: request)
         return document
@@ -112,6 +123,7 @@ final class GenerationPipeline {
         clearError(on: job)
         touch(document: document, job: job)
         try saveContext()
+        reportProgress(job)
         try await execute(job: job, request: request)
         return document
     }
@@ -135,6 +147,7 @@ final class GenerationPipeline {
         document.state = .processing
         touch(document: document, job: job)
         try saveContext()
+        reportProgress(job)
 
         try await execute(job: job, request: request)
         return document
@@ -178,6 +191,7 @@ final class GenerationPipeline {
                     clearError(on: job)
                     touch(document: document, job: job)
                     try saveContext()
+                    reportProgress(job)
                 default:
                     throw GenerationPipelineError.unsupportedStage(job.stage)
                 }
@@ -193,6 +207,7 @@ final class GenerationPipeline {
             document.state = .draft
             touch(document: document, job: job)
             try saveContext()
+            reportProgress(job)
             throw CancellationError()
         } catch {
             let failedStage = resumableActiveStages.contains(job.stage)
@@ -205,6 +220,7 @@ final class GenerationPipeline {
             document.state = .failed
             touch(document: document, job: job)
             try saveContext()
+            reportProgress(job)
             throw error
         }
     }
@@ -217,7 +233,8 @@ final class GenerationPipeline {
         let providerRequest = try ArticlePromptBuilder.makeRequest(
             skill: request.skill,
             topic: request.topic,
-            genre: request.genre
+            genre: request.genre,
+            preferredWordCount: request.targetWordCount
         )
         let article = try await provider.generateArticle(request: providerRequest)
         try Task.checkCancellation()
@@ -230,6 +247,7 @@ final class GenerationPipeline {
         job.stage = .generatingQuestions
         touch(document: document, job: job)
         try saveContext()
+        reportProgress(job)
     }
 
     private func generateQuestions(
@@ -263,6 +281,7 @@ final class GenerationPipeline {
         job.stage = .translating
         touch(document: document, job: job)
         try saveContext()
+        reportProgress(job)
     }
 
     private func translate(
@@ -290,6 +309,7 @@ final class GenerationPipeline {
         job.stage = .validating
         touch(document: document, job: job)
         try saveContext()
+        reportProgress(job)
     }
 
     /// Provider 会校验单次响应；这里再从已持久化模型重建 DTO，防止阶段间映射遗漏。
@@ -300,7 +320,8 @@ final class GenerationPipeline {
         let articleRequest = try ArticlePromptBuilder.makeRequest(
             skill: request.skill,
             topic: request.topic,
-            genre: request.genre
+            genre: request.genre,
+            preferredWordCount: request.targetWordCount
         )
         let article = GeneratedArticle(
             title: document.title,
@@ -377,6 +398,10 @@ final class GenerationPipeline {
         } catch {
             throw GenerationPipelineError.persistenceFailed
         }
+    }
+
+    private func reportProgress(_ job: ProcessingJob) {
+        progressHandler?(job)
     }
 
     private func errorCode(for error: any Error) -> ProcessingErrorCode {

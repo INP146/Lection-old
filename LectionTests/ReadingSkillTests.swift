@@ -38,7 +38,8 @@ struct ReadingSkillTests {
         let request = try ArticlePromptBuilder.makeRequest(
             skill: skill,
             topic: "How city parks cool neighborhoods",
-            genre: "popular science"
+            genre: "popular science",
+            preferredWordCount: 425
         )
 
         #expect(request.minimumParagraphCount == 5)
@@ -46,6 +47,7 @@ struct ReadingSkillTests {
         #expect(request.prompt.user.contains("general-english-reading"))
         #expect(request.prompt.user.contains("version: 1"))
         #expect(request.prompt.user.contains("350-500 English words"))
+        #expect(request.prompt.user.contains("approximately 425 English words"))
         #expect(request.prompt.user.contains("5-7 paragraphs"))
         #expect(request.prompt.user.contains("unique UUID"))
         #expect(request.prompt.user.contains(skill.promptInstructions))
@@ -110,6 +112,13 @@ struct ReadingSkillTests {
                 skill: skill,
                 topic: "A topic",
                 genre: "legal brief"
+            )
+        }
+        #expect(throws: ReadingPromptBuilderError.preferredWordCountOutOfRange) {
+            try ArticlePromptBuilder.makeRequest(
+                skill: skill,
+                topic: "A topic",
+                preferredWordCount: 900
             )
         }
         #expect(throws: ReadingPromptBuilderError.duplicateSourceParagraphID) {

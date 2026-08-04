@@ -14,6 +14,8 @@ final class Question {
     var evidenceParagraphIDs: [UUID]
     var originRawValue: String
     var confidence: Double?
+    var selectedOptionID: UUID?
+    var answeredAt: Date?
 
     var document: ReadingDocument?
 
@@ -42,7 +44,9 @@ final class Question {
         explanation: String,
         evidenceParagraphIDs: [UUID],
         origin: ContentOrigin = .generated,
-        confidence: Double? = nil
+        confidence: Double? = nil,
+        selectedOptionID: UUID? = nil,
+        answeredAt: Date? = nil
     ) {
         self.id = id
         self.order = order
@@ -54,6 +58,18 @@ final class Question {
         self.evidenceParagraphIDs = evidenceParagraphIDs
         self.originRawValue = origin.rawValue
         self.confidence = confidence
+        self.selectedOptionID = selectedOptionID
+        self.answeredAt = answeredAt
+    }
+
+    /// 提交前不暴露判分结果；提交后只比较本地稳定选项 ID。
+    var isCorrect: Bool? {
+        guard answeredAt != nil,
+              let selectedOptionID,
+              let correctOptionID else {
+            return nil
+        }
+        return selectedOptionID == correctOptionID
     }
 }
 

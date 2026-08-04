@@ -11,9 +11,11 @@ struct GenerationPipelineTests {
         let container = try LectionSchema.makeContainer(isStoredInMemoryOnly: true)
         let fixtures = makeFixtures()
         let provider = PipelineTestProvider(fixtures: fixtures)
+        var observedStages: [ProcessingStage] = []
         let pipeline = GenerationPipeline(
             modelContext: container.mainContext,
-            provider: provider
+            provider: provider,
+            progressHandler: { observedStages.append($0.stage) }
         )
 
         let document = try await pipeline.start(makeRequest())
@@ -35,6 +37,13 @@ struct GenerationPipelineTests {
         #expect(job.retryCount == 0)
         #expect(job.lastErrorCode == nil)
         #expect(try pipeline.resumableJobs().isEmpty)
+        #expect(observedStages == [
+            .generatingArticle,
+            .generatingQuestions,
+            .translating,
+            .validating,
+            .completed,
+        ])
         #expect(await provider.callCounts() == .init(article: 1, questions: 1, translation: 1))
     }
 

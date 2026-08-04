@@ -38,6 +38,8 @@
 		A00000000000000000000004 /* ReadingSkillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* ReadingSkillTests.swift */; };
 		B00000000000000000000001 /* GenerationPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* GenerationPipeline.swift */; };
 		B00000000000000000000002 /* GenerationPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* GenerationPipelineTests.swift */; };
+		C00000000000000000000001 /* GenerationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* GenerationCoordinator.swift */; };
+		C00000000000000000000002 /* ReadingPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000002 /* ReadingPracticeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 		A10000000000000000000004 /* ReadingSkillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingSkillTests.swift; sourceTree = "<group>"; };
 		B10000000000000000000001 /* GenerationPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipeline.swift; sourceTree = "<group>"; };
 		B10000000000000000000002 /* GenerationPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipelineTests.swift; sourceTree = "<group>"; };
+		C10000000000000000000001 /* GenerationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationCoordinator.swift; sourceTree = "<group>"; };
+		C10000000000000000000002 /* ReadingPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPracticeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 			children = (
 				0718293A4B5C6D7E8F901A2B /* Create */,
 				D4E5F60718293A4B5C6D7E8F /* Library */,
+				C20000000000000000000001 /* Reading */,
 				3A4B5C6D7E8F901A2B3C4D5E /* Settings */,
 			);
 			path = Features;
@@ -167,6 +172,7 @@
 		0718293A4B5C6D7E8F901A2B /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				C10000000000000000000001 /* GenerationCoordinator.swift */,
 				F60718293A4B5C6D7E8F901A /* NewPracticeView.swift */,
 			);
 			path = Create;
@@ -178,6 +184,14 @@
 				B2C3D4E5F60718293A4B5C6D /* LibraryView.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		C20000000000000000000001 /* Reading */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000002 /* ReadingPracticeView.swift */,
+			);
+			path = Reading;
 			sourceTree = "<group>";
 		};
 		8ED1701E9BB5BD1BC10638C5 /* Products */ = {
@@ -354,6 +368,8 @@
 				800000000000000000000001 /* AIProvider.swift in Sources */,
 				800000000000000000000002 /* AIResponseValidator.swift in Sources */,
 				B00000000000000000000001 /* GenerationPipeline.swift in Sources */,
+				C00000000000000000000001 /* GenerationCoordinator.swift in Sources */,
+				C00000000000000000000002 /* ReadingPracticeView.swift in Sources */,
 				800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */,
 				800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */,
 				A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */,

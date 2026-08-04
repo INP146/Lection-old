@@ -16,7 +16,11 @@ struct PersistenceTests {
 
         do {
             let container = try makeDiskContainer(at: storeURL)
-            container.mainContext.insert(PreviewFixtures.makeDocument())
+            let document = PreviewFixtures.makeDocument()
+            let question = try #require(document.questions.first)
+            question.selectedOptionID = question.correctOptionID
+            question.answeredAt = Date(timeIntervalSince1970: 1_700_000_000)
+            container.mainContext.insert(document)
             try container.mainContext.save()
         }
 
@@ -32,6 +36,9 @@ struct PersistenceTests {
             #expect(document.paragraphs.allSatisfy { $0.translatedText?.isEmpty == false })
             #expect(document.questions.count == 1)
             #expect(document.questions.first?.options.count == 3)
+            #expect(document.questions.first?.selectedOptionID != nil)
+            #expect(document.questions.first?.answeredAt == Date(timeIntervalSince1970: 1_700_000_000))
+            #expect(document.questions.first?.isCorrect == true)
             #expect(document.processingJobs.first?.stage == .completed)
         }
     }
