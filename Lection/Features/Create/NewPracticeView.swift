@@ -9,7 +9,7 @@ struct NewPracticeView: View {
     @State private var topic = ""
     @State private var articleLength = ArticleLength.medium
     @State private var providerIssue: String?
-    @FocusState private var isTopicFieldFocused: Bool
+    @FocusState private var focusedField: FocusedField?
 
     var body: some View {
         NavigationStack {
@@ -23,7 +23,7 @@ struct NewPracticeView: View {
                         axis: .vertical
                     )
                     .lineLimit(2...4)
-                    .focused($isTopicFieldFocused)
+                    .focused($focusedField, equals: .topic)
                     .disabled(coordinator.isRunning)
                 }
 
@@ -52,20 +52,8 @@ struct NewPracticeView: View {
 
                 generationSection
             }
-            .scrollDismissesKeyboard(.interactively)
+            .keyboardDismissible(focusedField: $focusedField)
             .navigationTitle("新建练习")
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button {
-                        isTopicFieldFocused = false
-                    } label: {
-                        Image(systemName: "keyboard.chevron.compact.down")
-                    }
-                    .accessibilityLabel("收起键盘")
-                    .help("收起键盘")
-                }
-            }
             .onAppear(perform: refreshProviderStatus)
             .onChange(of: coordinator.phase) {
                 refreshProviderStatus()
@@ -137,7 +125,7 @@ struct NewPracticeView: View {
     }
 
     private func startGeneration() {
-        isTopicFieldFocused = false
+        focusedField = nil
         do {
             let skill = try ReadingSkillLoader().loadBuiltInSkill()
             let configuration = UserDefaultsProviderConfigurationStore().load()
@@ -157,6 +145,10 @@ struct NewPracticeView: View {
 
     private func refreshProviderStatus() {
         providerIssue = coordinator.providerConfigurationIssue()
+    }
+
+    private enum FocusedField: Hashable {
+        case topic
     }
 }
 

@@ -4,6 +4,7 @@ struct SettingsView: View {
     @State private var settings = ProviderSettings()
     @State private var isAPIKeyVisible = false
     @State private var isDeleteConfirmationPresented = false
+    @FocusState private var focusedField: FocusedField?
 
     var body: some View {
         NavigationStack {
@@ -13,10 +14,12 @@ struct SettingsView: View {
                         .keyboardType(.URL)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        .focused($focusedField, equals: .baseURL)
 
                     TextField("模型名称", text: $settings.modelName)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        .focused($focusedField, equals: .modelName)
 
                     Stepper(value: $settings.requestTimeout, in: 15...180, step: 15) {
                         LabeledContent("请求超时", value: "\(Int(settings.requestTimeout)) 秒")
@@ -33,8 +36,10 @@ struct SettingsView: View {
                         Group {
                             if isAPIKeyVisible {
                                 TextField(apiKeyPlaceholder, text: $settings.apiKeyInput)
+                                    .focused($focusedField, equals: .apiKey)
                             } else {
                                 SecureField(apiKeyPlaceholder, text: $settings.apiKeyInput)
+                                    .focused($focusedField, equals: .apiKey)
                             }
                         }
                         .textInputAutocapitalization(.never)
@@ -77,6 +82,7 @@ struct SettingsView: View {
                 }
                 .disabled(settings.isBusy)
             }
+            .keyboardDismissible(focusedField: $focusedField)
             .navigationTitle("设置")
             .alert("删除 API Key？", isPresented: $isDeleteConfirmationPresented) {
                 Button("删除", role: .destructive) {
@@ -89,6 +95,12 @@ struct SettingsView: View {
 
     private var apiKeyPlaceholder: String {
         settings.hasSavedAPIKey ? "输入新密钥以替换" : "API Key"
+    }
+
+    private enum FocusedField: Hashable {
+        case baseURL
+        case modelName
+        case apiKey
     }
 
     @ViewBuilder

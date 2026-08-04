@@ -40,6 +40,7 @@
 		B00000000000000000000002 /* GenerationPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* GenerationPipelineTests.swift */; };
 		C00000000000000000000001 /* GenerationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000001 /* GenerationCoordinator.swift */; };
 		C00000000000000000000002 /* ReadingPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000002 /* ReadingPracticeView.swift */; };
+		D00000000000000000000001 /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10000000000000000000001 /* KeyboardDismissModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		B10000000000000000000002 /* GenerationPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPipelineTests.swift; sourceTree = "<group>"; };
 		C10000000000000000000001 /* GenerationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationCoordinator.swift; sourceTree = "<group>"; };
 		C10000000000000000000002 /* ReadingPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPracticeView.swift; sourceTree = "<group>"; };
+		D10000000000000000000001 /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				300000000000000000000001 /* Persistence */,
 				A20000000000000000000001 /* Resources */,
 				700000000000000000000002 /* Security */,
+				D20000000000000000000001 /* UI */,
 			);
 			path = Lection;
 			sourceTree = "<group>";
@@ -192,6 +195,14 @@
 				C10000000000000000000002 /* ReadingPracticeView.swift */,
 			);
 			path = Reading;
+			sourceTree = "<group>";
+		};
+		D20000000000000000000001 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D10000000000000000000001 /* KeyboardDismissModifier.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		8ED1701E9BB5BD1BC10638C5 /* Products */ = {
@@ -370,6 +381,7 @@
 				B00000000000000000000001 /* GenerationPipeline.swift in Sources */,
 				C00000000000000000000001 /* GenerationCoordinator.swift in Sources */,
 				C00000000000000000000002 /* ReadingPracticeView.swift in Sources */,
+				D00000000000000000000001 /* KeyboardDismissModifier.swift in Sources */,
 				800000000000000000000003 /* StructuredResponseDecoder.swift in Sources */,
 				800000000000000000000004 /* OpenAICompatibleProvider.swift in Sources */,
 				A00000000000000000000002 /* ReadingPromptBuilder.swift in Sources */,
