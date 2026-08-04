@@ -16,10 +16,7 @@ struct ContentView: View {
             }
 
             Tab("设置", systemImage: "gearshape", value: .settings) {
-                NavigationStack {
-                    Color.clear
-                        .navigationTitle("设置")
-                }
+                SettingsView()
             }
         }
     }
