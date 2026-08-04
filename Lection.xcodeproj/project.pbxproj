@@ -20,6 +20,11 @@
 		100000000000000000000004 /* LectionSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* LectionSchema.swift */; };
 		100000000000000000000005 /* PreviewFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* PreviewFixtures.swift */; };
 		400000000000000000000001 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400000000000000000000002 /* PersistenceTests.swift */; };
+		500000000000000000000001 /* ProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000001 /* ProviderConfiguration.swift */; };
+		500000000000000000000002 /* ProviderConnectionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000002 /* ProviderConnectionTester.swift */; };
+		500000000000000000000003 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000003 /* KeychainStore.swift */; };
+		500000000000000000000004 /* ProviderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000004 /* ProviderSettings.swift */; };
+		500000000000000000000005 /* ProviderSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000005 /* ProviderSettingsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,11 @@
 		200000000000000000000005 /* PreviewFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFixtures.swift; sourceTree = "<group>"; };
 		400000000000000000000002 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		400000000000000000000004 /* LectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		600000000000000000000001 /* ProviderConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfiguration.swift; sourceTree = "<group>"; };
+		600000000000000000000002 /* ProviderConnectionTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionTester.swift; sourceTree = "<group>"; };
+		600000000000000000000003 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		600000000000000000000004 /* ProviderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettings.swift; sourceTree = "<group>"; };
+		600000000000000000000005 /* ProviderSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSettingsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,12 +83,14 @@
 		85513A506FC0223D1709A17C /* Lection */ = {
 			isa = PBXGroup;
 			children = (
+				700000000000000000000001 /* AI */,
 				636B82AD9B459A906A0176D7 /* Assets.xcassets */,
 				DCB86238B33BA404D2C9F538 /* ContentView.swift */,
 				C3D4E5F60718293A4B5C6D7E /* Features */,
 				05C33C0305D1E2B20C6124A4 /* LectionApp.swift */,
 				6D7E8F901A2B3C4D5E6F7081 /* Models */,
 				300000000000000000000001 /* Persistence */,
+				700000000000000000000002 /* Security */,
 			);
 			path = Lection;
 			sourceTree = "<group>";
@@ -116,6 +128,7 @@
 		3A4B5C6D7E8F901A2B3C4D5E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				600000000000000000000004 /* ProviderSettings.swift */,
 				293A4B5C6D7E8F901A2B3C4D /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -150,8 +163,26 @@
 			isa = PBXGroup;
 			children = (
 				400000000000000000000002 /* PersistenceTests.swift */,
+				600000000000000000000005 /* ProviderSettingsTests.swift */,
 			);
 			path = LectionTests;
+			sourceTree = "<group>";
+		};
+		700000000000000000000001 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000001 /* ProviderConfiguration.swift */,
+				600000000000000000000002 /* ProviderConnectionTester.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		700000000000000000000002 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000003 /* KeychainStore.swift */,
+			);
+			path = Security;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				400000000000000000000001 /* PersistenceTests.swift in Sources */,
+				500000000000000000000005 /* ProviderSettingsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500000000000000000000001 /* ProviderConfiguration.swift in Sources */,
+				500000000000000000000002 /* ProviderConnectionTester.swift in Sources */,
+				500000000000000000000003 /* KeychainStore.swift in Sources */,
+				500000000000000000000004 /* ProviderSettings.swift in Sources */,
 				18293A4B5C6D7E8F901A2B3C /* SettingsView.swift in Sources */,
 				4DE6265849C384B5AC55B319 /* ContentView.swift in Sources */,
 				4B5C6D7E8F901A2B3C4D5E6F /* ReadingDocument.swift in Sources */,
