@@ -28,27 +28,48 @@ struct ProviderConfigurationTests {
         #expect(!persistedText.contains("test-secret-api-key"))
     }
 
-    @Test("Base URL requires HTTPS and a host")
-    func baseURLValidation() {
-        #expect(throws: ProviderConfigurationError.invalidBaseURL) {
-            try ProviderConfiguration.validated(
-                baseURLText: "http://example.com/v1",
-                modelName: "model",
-                requestTimeout: 60,
-                supportsJSONSchema: true,
-                supportsJSONObject: true
-            )
+    @Test("Local network HTTP is allowed")
+    func localHTTPValidation() throws {
+        let allowedURLs = [
+            "http://192.168.1.20:11434/v1",
+            "http://10.0.0.8/v1",
+            "http://172.16.1.5/v1",
+            "http://localhost:8080/v1",
+            "http://modelbox.local/v1",
+            "http://modelbox/v1",
+            "http://[fd00::1]:8080/v1",
+            "http://[fe80::1]:8080/v1",
+        ]
+
+        for baseURL in allowedURLs {
+            let configuration = try validatedConfiguration(baseURL: baseURL)
+            #expect(configuration.baseURL.absoluteString == baseURL)
+        }
+    }
+
+    @Test("Public HTTP and malformed URLs are rejected")
+    func publicHTTPValidation() {
+        #expect(throws: ProviderConfigurationError.insecurePublicBaseURL) {
+            try validatedConfiguration(baseURL: "http://example.com/v1")
+        }
+
+        #expect(throws: ProviderConfigurationError.insecurePublicBaseURL) {
+            try validatedConfiguration(baseURL: "http://8.8.8.8/v1")
         }
 
         #expect(throws: ProviderConfigurationError.invalidBaseURL) {
-            try ProviderConfiguration.validated(
-                baseURLText: "https:///v1",
-                modelName: "model",
-                requestTimeout: 60,
-                supportsJSONSchema: true,
-                supportsJSONObject: true
-            )
+            try validatedConfiguration(baseURL: "https:///v1")
         }
+    }
+
+    private func validatedConfiguration(baseURL: String) throws -> ProviderConfiguration {
+        try ProviderConfiguration.validated(
+            baseURLText: baseURL,
+            modelName: "model",
+            requestTimeout: 60,
+            supportsJSONSchema: true,
+            supportsJSONObject: true
+        )
     }
 }
 
