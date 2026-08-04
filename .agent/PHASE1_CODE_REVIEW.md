@@ -249,6 +249,7 @@ Phase 1 的基础架构清晰，SwiftData 聚合关系、生成任务分阶段�
 
 - `xcodebuild build-for-testing` 通过。
 - iPhone 17 Pro Simulator 中，排除缺少 Keychain entitlement 的单测后，45 个测试、7 个 suite 通过。
-- Keychain 生命周期测试在未签名 Simulator 测试进程中返回 `errSecMissingEntitlement`（`-34018`）；需在带 entitlement 的签名环境或真机复验。
+- 真机端到端闭环验证已完成。
+- Keychain 生命周期测试在未签名 Simulator 测试进程中返回 `errSecMissingEntitlement`（`-34018`）；该单测仍需在带 entitlement 的签名环境复验。
 
-因此，本报告原先的“完成全部 High 与 Medium 后再标记通过”的门槛已满足；L-01、L-02 的剩余发布事项和运行时 UI/无障碍验证仍应在发布前完成。
+因此，本报告原先的“完成全部 High 与 Medium 后再标记通过”的门槛及真机端到端验证均已满足；L-01、L-02 的剩余发布事项仍应在发布前完成。
